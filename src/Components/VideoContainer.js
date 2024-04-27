@@ -31,7 +31,10 @@ const VideoContainer = () => {
       data=await fetch(YOUTUBE_SEARCH_API+searchText);
     }
    
+  
     const json=await data.json();
+
+    json.items.splice(json.items.length-2,2)
 
     setVideos(json.items);
   }

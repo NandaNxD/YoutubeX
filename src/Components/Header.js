@@ -40,6 +40,10 @@ const Header = () => {
     dispatch(changeSearchText(clickedText));
   }
 
+  const emptySearchText=()=>{
+    setSearchQuery('');
+  }
+
 
   useEffect(()=>{
     const timer=setTimeout(()=>{
@@ -75,7 +79,8 @@ const Header = () => {
       <div className='flex flex-col col-span-10 justify-center items-center relative'>
 
         <div className='flex justify-center w-full'>
-          <input className='border border-black rounded-l-full p-2 px-4 w-[50%]' type='text'
+          <input className='border border-gray-300 rounded-l-full p-2 px-4 pr-7 w-[50%]' type='text'
+            placeholder='Search'
               value={searchQuery}
               onChange={(e)=>{
                 setSearchQuery(e.target.value);
@@ -91,22 +96,29 @@ const Header = () => {
               }}
 
             ></input>
-            <button className='border border-black rounded-r-full p-2 px-4 bg-gray-100 hover:bg-gray-200 active:bg-gray-100'>
+           
+            <button className='border border-gray-300 rounded-r-full p-2 px-5 bg-gray-100 active:bg-gray-100 relative'>
               <img alt='search svg' src='search.svg'></img>
+              {
+                searchQuery.length? <img src='cross.svg' alt='cross' className='absolute top-2 -left-8'
+                  onClick={emptySearchText}
+                ></img>:''
+              }
+              
             </button>
         </div>
 
         {
           showSearchResults &&
             (
-              <div className='rounded-lg shadow-lg absolute bg-white top-14 w-[55%] z-10'>
+              <div className={`rounded-lg shadow-lg absolute bg-white  top-14 w-[55%] z-10 ${searchResults.length && 'border border-gray-300'}`}>
                 <ul>
                   {
                     
                     searchResults.map((resValue,index)=>{
-                      return ( <li className='px-2 py-2 hover:bg-gray-100' key={index} onMouseDown={(e)=>{
+                      return ( <li className='px-2 py-2 hover:bg-gray-100 flex gap-4' key={index} onMouseDown={(e)=>{
                         handleSearchResultClick(resValue);
-                      }}>🔍 {resValue}</li>);
+                      }}> <img alt='search svg' src='search.svg'></img>  {resValue}</li>);
                     })
                   }
                   </ul>
