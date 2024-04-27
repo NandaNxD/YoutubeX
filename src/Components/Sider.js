@@ -19,7 +19,7 @@ const Sider = () => {
 
 
   return (
-    <div className='hidden md:block shadow-lg p-2 md:w-2/12 lg:w-2/12'>
+    <div className='hidden md:block shadow-lg p-2 md:w-2/12 lg:w-2/12 fixed bg-white left-0 overflow-scroll h-full pb-10'>
       {
         data.map((data,index)=><Section imgType={data.imgType} sectionHeading={data.sectionHeading} listItems={data.listItems} key={data.sectionHeading} arrayIndex={index}/>)
       }

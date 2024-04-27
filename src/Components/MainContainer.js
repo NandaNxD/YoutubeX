@@ -16,7 +16,7 @@ const MainContainer = () => {
   },[])
 
   return (
-    <div className={isMenuOpen?`w-11/12 md:w-10/12 lg:w-10/12 flex flex-col items-center`:`w-full flex flex-col items-center`}>
+    <div className={isMenuOpen?`w-full md:w-10/12 lg:w-10/12 flex flex-col items-center md:ml-[16.67777%]`:`w-full flex flex-col items-center`}>
         <ButtonsList/>
         <VideoContainer/>
     </div>
