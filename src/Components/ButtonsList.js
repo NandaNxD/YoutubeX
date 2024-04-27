@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from './Button'
 
 const ButtonsList = () => {
@@ -20,11 +20,14 @@ const ButtonsList = () => {
         'Daimler',
         'Javascript'
     ]
+
+  const [selectedButtonIndex,setSelectedButtonIndex]=useState(0);
+
   return (
-    <div className='flex gap-3 px-2 mt-2 mb-2 overflow-y-scroll no-scrollbar'>
+    <div className='flex gap-3 px-12 w-full  mt-2 mb-2 overflow-y-scroll no-scrollbar bg-white'>
         {
-            buttonTextList.map((text)=>{
-                return <Button text={text} key={text}/>
+            buttonTextList.map((text,index)=>{
+                return <Button text={text} key={text} selectedButtonIndex={selectedButtonIndex} setSelectedButtonIndex={setSelectedButtonIndex} buttonIndex={index}/>
             })
         }
     </div>

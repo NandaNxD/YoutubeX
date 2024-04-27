@@ -12,7 +12,7 @@ const MainContainer = () => {
   },[])
 
   return (
-    <div className='w-11/12 md:w-10/12 lg:w-11/12 '>
+    <div className='w-11/12 md:w-10/12 lg:w-10/12 flex flex-col items-center'>
         <ButtonsList/>
         <VideoContainer/>
     </div>

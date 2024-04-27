@@ -1,43 +1,15 @@
 import React from 'react'
 import Section from './Section'
+import { MOCK_DATA } from './Utils/MockSiderdata'
 
 const Sider = () => {
 
-  const siderData=[
-    {
-      heading:'Home',
-      listItems:[]
-    },
-    {
-      heading:'Shorts',
-      listItems:[]
-    },
-    {
-      heading:'Videos',
-      listItems:[]
-    },
-    {
-      heading:'Live',
-      listItems:[]
-    },
-    {
-      heading:'Subscriptions',
-      listItems:[
-        'Music','Sports','Gaming','Movies'
-      ]
-    },
-    {
-      heading:'Watch Later',
-      listItems:[
-        'Cricket','Courses','News'
-      ]
-    }
-  ]
+  const data=MOCK_DATA
 
   return (
-    <div className='hidden md:block shadow-lg p-2 md:w-2/12 lg:w-1/12 mb-2 mt-2'>
+    <div className='hidden md:block shadow-lg p-2 md:w-2/12 lg:w-2/12'>
       {
-        siderData.map(data=><Section heading={data.heading} listItems={data.listItems} key={data.heading}/>)
+        data.map((data,index)=><Section imgType={data.imgType} sectionHeading={data.sectionHeading} listItems={data.listItems} key={data.sectionHeading} arrayIndex={index}/>)
       }
 
     </div>

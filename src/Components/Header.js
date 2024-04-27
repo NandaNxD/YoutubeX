@@ -60,7 +60,7 @@ const Header = () => {
 
 
   return (
-    <div className="shadow-lg grid grid-flow-col px-2">
+    <div className="shadow-md grid grid-flow-col px-2 fixed bg-white w-full z-20">
 
       <div className='flex items-center col-span-1'>
        <img alt='burgerMenu Icon' src='https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp'  className='h-9 bg-white hover:scale-105 active:scale-100 transition-all cursor-pointer hidden md:block' onClick={toggleMenuHandler}>
@@ -72,10 +72,10 @@ const Header = () => {
         </img>
       </div>
     
-      <div className='flex flex-col col-span-10 justify-center relative'>
+      <div className='flex flex-col col-span-10 justify-center items-center relative'>
 
-        <div>
-          <input className='border border-black rounded-l-full p-2 w-3/5' type='text'
+        <div className='flex justify-center w-full'>
+          <input className='border border-black rounded-l-full p-2 px-4 w-[50%]' type='text'
               value={searchQuery}
               onChange={(e)=>{
                 setSearchQuery(e.target.value);
@@ -92,14 +92,14 @@ const Header = () => {
 
             ></input>
             <button className='border border-black rounded-r-full p-2 px-4 bg-gray-100 hover:bg-gray-200 active:bg-gray-100'>
-                🔍
+              <img alt='search svg' src='search.svg'></img>
             </button>
         </div>
 
         {
           showSearchResults &&
             (
-              <div className='rounded-lg shadow-lg absolute bg-white top-14 w-3/5 z-10'>
+              <div className='rounded-lg shadow-lg absolute bg-white top-14 w-[55%] z-10'>
                 <ul>
                   {
                     
@@ -118,8 +118,8 @@ const Header = () => {
          
       </div>
 
-      <div className='flex items-center col-span-1'>
-        <img alt='account-icon' src='https://www.shutterstock.com/image-vector/user-icon-trendy-flat-style-600nw-1697898655.jpg' className='h-16'>
+      <div className='flex items-center col-span-1 justify-end'>
+        <img alt='account-icon' src='avatar.jpg' className='h-16 p-3 rounded-full'>
         </img>
       </div>
       

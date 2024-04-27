@@ -42,7 +42,7 @@ const VideoContainer = () => {
       {
         videos.map((videoData)=>{
           return (
-            <Link to={'/watch?v='+videoData.id} key={videoData.id} className='w-full sm:w-64 md:w-72 lg:w-80 mx-1'>
+            <Link to={'/watch?v='+videoData.id} key={videoData.id} className='w-full sm:w-64 md:w-72 lg:w-72 mx-1'>
               <VideoCard videoData={videoData}/>
             </Link>
           )
