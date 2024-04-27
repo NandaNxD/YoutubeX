@@ -76,7 +76,7 @@ const Header = () => {
         </img>
       </div>
     
-      <div className='flex flex-col col-span-10 justify-center items-center relative'>
+      <div className='flex flex-col md:col-span-10 justify-center items-center relative'>
 
         <div className='flex justify-center w-full'>
           <input className='border border-gray-300 rounded-l-full p-2 px-4 pr-7 w-[50%]' type='text'
