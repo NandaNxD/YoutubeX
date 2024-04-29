@@ -29,10 +29,10 @@ const WatchPage = () => {
           referrerpolicy="strict-origin-when-cross-origin" 
           allowfullscreen></iframe>
 
-          <CommentsContainer/>
+          <CommentsContainer key={videoId} />
 
       </div>
-      <VideoContainer>
+      <VideoContainer key={videoId+Math.random().toString()}>
 
       </VideoContainer>
         
