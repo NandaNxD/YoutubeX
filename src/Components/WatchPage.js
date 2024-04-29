@@ -15,6 +15,14 @@ const WatchPage = () => {
         dispatch(closeMenu());
     },[])
 
+    useEffect(()=>{
+      window.scrollTo({
+        top:0,
+        left:0,
+        behavior:'instant'
+      })
+    },[searchParams])
+
 
   return (
     <div className='p-6 w-full flex gap-4'>
