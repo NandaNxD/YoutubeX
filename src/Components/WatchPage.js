@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useParams, useSearchParams } from 'react-router-dom'
 import { closeMenu, toggleMenu } from './Utils/appSlice';
 import CommentsContainer from './CommentsContainer';
+import VideoContainer from './VideoContainer';
 
 const WatchPage = () => {
     const [searchParams]=useSearchParams();
@@ -16,18 +17,25 @@ const WatchPage = () => {
 
 
   return (
-    <div className='p-6'>
-        <iframe 
-        width="1260" 
-        height="600" 
-        src={`https://www.youtube.com/embed/${videoId}`} 
-        title="YouTube video player" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
-        referrerpolicy="strict-origin-when-cross-origin" 
-        allowfullscreen></iframe>
+    <div className='p-6 w-full flex gap-4'>
+      <div className='w-[70%]'>
 
-        <CommentsContainer/>
+        <iframe 
+          className='w-full md:w-full h-[70vh] rounded-lg'
+          src={`https://www.youtube.com/embed/${videoId}`} 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen></iframe>
+
+          <CommentsContainer/>
+
+      </div>
+      <VideoContainer>
+
+      </VideoContainer>
+        
     </div>
   )
 }

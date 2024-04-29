@@ -1,9 +1,12 @@
 import React from 'react'
+import { useSearchParams } from 'react-router-dom';
 
-const Shimmer
- = () => {
+const Shimmer= () => {
+    const [searchParams]=useSearchParams();
+    const videoId=searchParams.get('v');
+
   return (
-        <div className="border border-gray-300 shadow rounded-lg p-2 w-full sm:w-64 md:w-72 lg:w-72">
+        <div className={videoId?'border border-gray-300 shadow rounded-lg p-2 w-full':`border border-gray-300 shadow rounded-lg p-2 w-full sm:w-64 md:w-72 lg:w-72`}>
             <div className="rounded-lg bg-slate-300 h-40 w-full mb-2 animate-pulse">
 
             </div>

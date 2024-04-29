@@ -1,6 +1,6 @@
 import React from 'react'
 
-const VideoCard = ({videoData}) => {
+const VideoCard = ({videoData,showLessText}) => {
 
     const {title,thumbnails,description,channelTitle}=videoData.snippet;
 
@@ -16,13 +16,13 @@ const VideoCard = ({videoData}) => {
     }
     
     return (
-        <div className='rounded-lg m-2  hover:brightness-90 cursor-pointer'>
-            <img alt='video-thumbnail' src={thumbnails.medium.url} className='rounded-lg w-full' ></img>
+        <div className={`rounded-lg m-2  hover:brightness-90 cursor-pointer ${showLessText?'flex':''}`}>
+            <img alt='video-thumbnail' src={thumbnails.medium.url} className={`rounded-lg  ${showLessText?'w-[50%]':'w-full'} `} ></img>
 
-            <div className='p-2'>
-                <h2 className='font-bold'>{title}</h2>
+            <div className={`p-2 ${showLessText?'w-[50%]':''}`}>
+                <h2 className={showLessText?'text-ellipsis overflow-hidden text-nowrap font-bold':'font-bold'}>{title}</h2>
 
-                <h2 className='text-base'>{channelTitle}</h2>
+                <h2 className={showLessText?'text-ellipsis overflow-hidden text-nowrap text-base':'text-base'}>{channelTitle}</h2>
                 <h2>{viewCountText} views</h2>
             </div>
           
