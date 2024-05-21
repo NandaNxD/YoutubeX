@@ -86,7 +86,7 @@ const VideoContainer = () => {
 
 
   return (
-    <div>
+    <div  className={!videoId ? 'w-full' : 'w-[30%]'}>
       <InfiniteScroll
         dataLength={videos.length} //This is important field to render the next data
         next={fetchData}
@@ -97,7 +97,7 @@ const VideoContainer = () => {
             <b>Yay! You have seen it all</b>
           </p>
         }
-        className={!videoId ? 'flex flex-wrap justify-center' : 'flex flex-col w-[30%]'}
+        className={!videoId ? 'flex flex-wrap justify-center' : 'flex flex-col'}
       >
         {
           videos.map((videoData) => {
