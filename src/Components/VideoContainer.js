@@ -5,80 +5,112 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ShimmerVideoContainer from './ShimmerVideoContainer.js';
 import { storeVideos } from './Utils/appSlice.js';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const VideoContainer = () => {
-  const [searchParams]=useSearchParams();
-  const videoId=searchParams.get('v');
+  const [searchParams] = useSearchParams();
+  const videoId = searchParams.get('v');
 
-  const [videos,setVideos]=useState([]);
+  const [videos, setVideos] = useState([]);
 
-  const [loader,setLoader]=useState(true);
- 
-  const dispatch=useDispatch();
+  const [loader, setLoader] = useState(true);
 
-  const searchText=useSelector((store)=>store.search.searchText)
+  const [nextPageToken, setNextPageToken] = useState(null);
 
-  useEffect(()=>{
-    if(searchText.length){
+  const dispatch = useDispatch();
+
+  const searchText = useSelector((store) => store.search.searchText)
+
+  useEffect(() => {
+    if (searchText.length) {
       getVideos(searchText);
     }
-    else{
-      getVideos('');  
+    else {
+      getVideos('');
     }
-   
-  },[searchText])
 
-  const shuffleArray=(array)=> {
+  }, [searchText])
+
+  const shuffleArray = (array) => {
     for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
     }
-}
+  }
 
-  const getVideos=async(searchText)=>{
+  const getVideos = async (searchText) => {
     let data;
-    if(!searchText){
-      data=await fetch(YOUTUBE_API);
+    if (!searchText) {
+      data = await fetch(YOUTUBE_API);
     }
-    else{
-      data=await fetch(YOUTUBE_SEARCH_API+searchText);
+    else {
+      data = await fetch(YOUTUBE_SEARCH_API + searchText);
     }
-   
-  
-    const json=await data.json();
 
-    json.items.splice(json.items.length-2,2);
+
+    const json = await data.json();
+
+    json.items.splice(json.items.length - 2, 2);
 
     setLoader(false);
 
-    if(videoId)
-    shuffleArray(json.items)
-  
+    setNextPageToken(json.nextPageToken);
+
+    if (videoId)
+      shuffleArray(json.items)
+
     setVideos(json.items);
 
   }
-  console.log(loader)
+  
+  const fetchData = async() => {
+    console.log('helloo');
+    let data = await fetch(YOUTUBE_API+'&pageToken='+nextPageToken);
 
-  if(loader){
-    return (<ShimmerVideoContainer/>);
+    const json = await data.json();
+
+    setLoader(false);
+
+    setNextPageToken(json.nextPageToken || json.prevPageToken);
+
+    shuffleArray(json.items)
+
+    setVideos([...videos,...json.items]);
+  }
+
+  if (loader) {
+    return (<ShimmerVideoContainer />);
   }
 
 
   return (
-    <div className={!videoId?'flex flex-wrap justify-center':'flex flex-col w-[30%]'}>
-      {
-        videos.map((videoData)=>{
-          return (
-            <Link to={'/watch?v='+videoData.id} key={videoData.id} className={!videoId?`w-full sm:w-64 md:w-72 lg:w-72 mx-1`:'w-full mx-1'}>
-              <VideoCard videoData={videoData} showLessText={videoId?true:false}/>
-            </Link>
-          )
+    <div>
+      <InfiniteScroll
+        dataLength={videos.length} //This is important field to render the next data
+        next={fetchData}
+        hasMore={true}
+        loader={<h4>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: 'center' }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+        className={!videoId ? 'flex flex-wrap justify-center' : 'flex flex-col w-[30%]'}
+      >
+        {
+          videos.map((videoData) => {
+            return (
+              <Link to={'/watch?v=' + videoData.id} key={videoData.id} className={!videoId ? `w-full sm:w-64 md:w-72 lg:w-72 mx-1` : 'w-full mx-1'}>
+                <VideoCard videoData={videoData} showLessText={videoId ? true : false} />
+              </Link>
+            )
 
-        })
-      }
-    
+          })
+        }
+      </InfiniteScroll>
+
     </div>
   )
 }

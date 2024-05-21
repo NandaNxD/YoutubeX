@@ -20,13 +20,12 @@ const VideoCard = ({videoData,showLessText}) => {
             <img alt='video-thumbnail' src={thumbnails.medium.url} className={`rounded-lg  ${showLessText?'w-[50%]':'w-full'} `} ></img>
 
             <div className={`p-2 ${showLessText?'w-[50%]':''}`}>
-                <h2 className={showLessText?'text-ellipsis overflow-hidden text-nowrap font-bold':'font-bold'}>{title}</h2>
+                <h2 className={showLessText?'text-ellipsis overflow-hidden text-nowrap font-bold youtube-font':'font-semibold youtube-font text-ellipsis overflow-hidden'}>{title}</h2>
 
-                <h2 className={showLessText?'text-ellipsis overflow-hidden text-nowrap text-base':'text-base'}>{channelTitle}</h2>
+                <h2 className={showLessText?'text-ellipsis overflow-hidden text-nowrap text-base youtube-font':'text-base youtube-font text-ellipsis overflow-hidden'}>{channelTitle}</h2>
                 <h2>{viewCountText} views</h2>
             </div>
           
-
         </div>
 
     )
